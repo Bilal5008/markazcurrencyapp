@@ -29,14 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-//    var viewModel = ViewModelProvider(this)[CurrencyViewModel::class.java]
-
-    //    private lateinit var viewModel: CurrencyViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContent {
             MainScreen(this)
         }
@@ -51,14 +45,13 @@ fun MainScreen(mainActivity: MainActivity) {
     val viewModel: CurrencyViewModel = hiltViewModel()
     fetchDataFromApi(viewModel, mainActivity)
     Column {
-
+        SimpleToolbar("Currency application")
     }
 
 
 }
 
 fun fetchDataFromApi(viewModel: CurrencyViewModel, mainActivity: MainActivity) {
-
 
     val getCarRegistrationObserver = Observer<Resource<CurrencyResponse>> { response ->
         when (response) {
@@ -72,6 +65,7 @@ fun fetchDataFromApi(viewModel: CurrencyViewModel, mainActivity: MainActivity) {
 
             is Resource.Success -> {
                 response.data?.let {
+
 
                 }
             }

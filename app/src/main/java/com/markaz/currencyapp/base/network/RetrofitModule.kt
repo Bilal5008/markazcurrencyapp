@@ -78,7 +78,7 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    fun providesUserApi(retrofit: Retrofit): CurrencyApiService {
-        return retrofit.create(CurrencyApiService::class.java)
+    fun providesUserApi(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }

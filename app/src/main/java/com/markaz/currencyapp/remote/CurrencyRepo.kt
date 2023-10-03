@@ -1,22 +1,24 @@
 package com.markaz.currencyapp.remote
 
-import com.markaz.currencyapp.base.network.CurrencyApiService
+
+import com.markaz.currencyapp.base.network.RemoteDataSource
 import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
 import com.task.currencyapp.data.remote.baseclient.erros.ApiError
-import retrofit2.Response
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
 
 interface CurrencyRepo {
-    suspend fun getCurrencyResponse(): ApiResponse<CurrencyResponse>
+    suspend fun getCurrencyResponse(url: String): ApiResponse<CurrencyResponse>
 }
 
-class CurrencyRepoImpl @Inject constructor(val apiService: CurrencyApiService) : BaseRepository(),
+@ActivityRetainedScoped
+class CurrencyRepoImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) : BaseRepository(),
     CurrencyRepo {
 
-    override suspend fun getCurrencyResponse(): ApiResponse<CurrencyResponse> {
+    override suspend fun getCurrencyResponse(url: String): ApiResponse<CurrencyResponse> {
         val response = executeSafelyRaw(call = {
-            apiService.getAllCurrencies()
+            remoteDataSource.getAllCurrencies(url)
         })
         return if (response?.isSuccessful == true) {
             ApiResponse.Success(response.code(), CurrencyResponse(currencies = response.body()))
