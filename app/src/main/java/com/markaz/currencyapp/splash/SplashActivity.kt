@@ -6,21 +6,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import com.markaz.currencyapp.MainActivity
+import com.markaz.currencyapp.utils.Coroutines
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
-@SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashActivity: ComponentActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launchWhenCreated {
+        Coroutines.default {
             delay(3000)
             val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
-
         }
+
     }
 
 
