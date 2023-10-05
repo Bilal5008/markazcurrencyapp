@@ -29,7 +29,8 @@ fun AppContainer(viewModel: CurrencyViewModel) {
             Screen.Screen1 -> BaseCurrencySelectionScreen(viewModel.responseCurrencyStateFlow) {
                 currentScreen = Screen.Screen2
             }
-            Screen.Screen2 -> CurrencyRateScreen(viewModel)
+            Screen.Screen2 -> CurrencyRateScreen(viewModel.responseCurrencyRatesStateFlow)
+
         }
     }
 }

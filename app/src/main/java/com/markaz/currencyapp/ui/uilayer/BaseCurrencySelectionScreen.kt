@@ -30,7 +30,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.markaz.currencyapp.dto.Currency
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.remote.erros.ApiError
 import kotlinx.coroutines.flow.StateFlow
@@ -38,42 +37,35 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 fun BaseCurrencySelectionScreen(
     responseCurrencyStateFlow: StateFlow<CurrencyResult>,
-    selectedItem: (index: CurrencyEntity) -> Unit
+    selectedItem: (index: CurrencyEntity) -> Unit,
 ) {
     val state = responseCurrencyStateFlow.collectAsState()
     when (val value = state.value) {
         is CurrencyResult.Success -> {
-
             Column {
                 SimpleToolbar("Currency application")
                 HeadingWidget("Please Select your Base Currency")
                 CurrencyListScreen(value.list, selectedItem)
             }
         }
-
         is CurrencyResult.Error -> {
             ErrorScreen(value.error)
 
         }
-
         is CurrencyResult.Loading -> {
             LoadingScreen()
         }
 
     }
-//    responseLiveData.responseCurrencyRatesStateFlow.collectAsState()
 
 }
 
 
-fun convertToCurrencyList(currenciesMap: Map<String, String>?): List<Currency> {
-    return currenciesMap?.map { (code, name) ->
-        Currency(currencyCode = code, currencyName = name)
-    } ?: emptyList()
-}
 
 @Composable
 fun ErrorScreen(error: ApiError) {
+
+    AlertDialogSample(error)
 
 }
 

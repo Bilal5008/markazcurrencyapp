@@ -87,11 +87,6 @@ class CurrencyViewModel @Inject constructor(
 
     }
 
-    private fun convertToCurrencyList(currenciesMap: Map<String, String>?): List<CurrencyEntity> {
-        return currenciesMap?.map { (code, name) ->
-            CurrencyEntity(currencyId = code, currencyName = name)
-        } ?: emptyList()
-    }
 
     private fun insertCurrenciesRates(response: Map<String, Double>?) {
         viewModelScope.launch(Dispatchers.IO) {
