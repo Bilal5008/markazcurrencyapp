@@ -1,6 +1,5 @@
 package com.markaz.currencyapp.remote
 
-import com.markaz.currencyapp.dto.BaseApiResponse
 import com.markaz.currencyapp.remote.erros.ApiError
 
 

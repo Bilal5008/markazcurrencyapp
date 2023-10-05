@@ -1,7 +1,7 @@
 package com.markaz.currencyapp.dto.responsedtos
 
 import com.google.gson.annotations.SerializedName
-import com.markaz.currencyapp.dto.BaseApiResponse
+import com.markaz.currencyapp.remote.BaseApiResponse
 
 data class CurrencyResponse(
     @SerializedName("currencies")

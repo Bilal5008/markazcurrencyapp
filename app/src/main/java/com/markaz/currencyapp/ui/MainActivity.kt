@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.markaz.currencyapp.ui.uilayer.AppContainer
 import com.markaz.currencyapp.viewmodel.CurrencyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

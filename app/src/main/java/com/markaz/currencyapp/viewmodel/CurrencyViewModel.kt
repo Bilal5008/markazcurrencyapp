@@ -2,9 +2,7 @@ package com.markaz.currencyapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.markaz.currencyapp.dto.Currency
 import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
-import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
 import com.markaz.currencyapp.local.localservice.ExchangeRepoLocal
 import com.markaz.currencyapp.remote.ApiResponse
 import com.markaz.currencyapp.remote.CurrencyRepo
@@ -12,6 +10,7 @@ import com.markaz.currencyapp.remote.CurrencyRepo.Companion.ALL_CURRENCIES_ENDPO
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.local.entities.ExchangeRateEntity
 import com.markaz.currencyapp.remote.CurrencyRepo.Companion.LATEST_RATES_ENDPOINT
+import com.markaz.currencyapp.ui.uilayer.CurrencyResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,9 +26,9 @@ class CurrencyViewModel @Inject constructor(
     ViewModel() {
 
     private val _responseCurrencyStateFlow =
-        MutableStateFlow<ApiResponse<CurrencyResponse>>(ApiResponse.Loading)
+        MutableStateFlow<CurrencyResult>(CurrencyResult.Loading)
 
-    val responseCurrencyStateFlow: StateFlow<ApiResponse<CurrencyResponse>>
+    val responseCurrencyStateFlow: StateFlow<CurrencyResult>
         get() = _responseCurrencyStateFlow
 
 
@@ -40,25 +39,15 @@ class CurrencyViewModel @Inject constructor(
         get() = _responseCurrencyRatesStateFlow
 
 
-    private val _items = MutableStateFlow<List<CurrencyEntity>>(emptyList())
-    val items: StateFlow<List<CurrencyEntity>> get() = _items
-
-
     fun getCurrencyPageData() {
         viewModelScope.launch(Dispatchers.IO) {
             exchangeRepoLocal.getCurrencies?.collect { currencies ->
                 if (currencies.isNotEmpty()) {
-                    val currencyList = currencies.map { entity ->
-                        Currency(
-                            currencyCode = entity.currencyId,
-                            currencyName = entity.currencyName
-                        )
-                    }
-                    _items.emit(currencies)
+                    _responseCurrencyStateFlow.emit(CurrencyResult.Success(currencies) )
                 } else {
                     val response = currencyRepoImpl.getAllCurrencies(ALL_CURRENCIES_ENDPOINT)
-                    if (response is ApiResponse.Success) {
-                        insertCurrencies(response.data.currencies)
+                    if (response is CurrencyResult.Success) {
+                        insertCurrencies(response.list)
                     }
                     _responseCurrencyStateFlow.emit(response)
                 }
@@ -90,9 +79,9 @@ class CurrencyViewModel @Inject constructor(
 
     }
 
-    private fun insertCurrencies(response: Map<String, String>?) {
+    private fun insertCurrencies(response: List<CurrencyEntity>) {
         viewModelScope.launch(Dispatchers.IO) {
-            exchangeRepoLocal.insertCurrencies(convertToCurrencyList(response))
+            exchangeRepoLocal.insertCurrencies(response)
         }
 
 
