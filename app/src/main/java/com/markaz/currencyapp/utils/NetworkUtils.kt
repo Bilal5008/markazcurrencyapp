@@ -3,7 +3,7 @@ package com.markaz.currencyapp.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import com.markaz.currencyapp.base.application.MarkazCurrencyApplication
+import com.markaz.currencyapp.di.application.MarkazCurrencyApplication
 
 object NetworkUtils {
     const val UTF_8 = "UTF-8"

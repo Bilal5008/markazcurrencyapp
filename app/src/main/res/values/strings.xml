@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Currency Markaz</string>
     <string name="please_wait">Please wait\n</string>
     <string name="title_activity_currency_rates">CurrencyRatesActivity</string>
 </resources>

@@ -41,9 +41,8 @@ fun MainScreen(
     selectedItem: (index: Currency) -> Unit
 ) {
     val state = responseLiveData.collectAsState()
-    val value = remember {
-        state.value
-    }
+    val value = state.value
+
     var currencyList: List<Currency>
 
     when (value) {
@@ -53,8 +52,6 @@ fun MainScreen(
                 SimpleToolbar("Currency application")
                 HeadingWidget("Please Select your Base Currency")
                 SuccessScreen(currencyList, selectedItem)
-
-
             }
         }
 
