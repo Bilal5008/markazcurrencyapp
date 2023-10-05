@@ -3,7 +3,7 @@ package com.markaz.currencyapp.remote.interfaces
 
 import com.markaz.currencyapp.dto.BaseApiResponse
 import com.markaz.currencyapp.remote.ApiResponse
-import com.task.currencyapp.data.remote.baseclient.erros.ApiError
+import com.markaz.currencyapp.remote.erros.ApiError
 import retrofit2.Response
 
 

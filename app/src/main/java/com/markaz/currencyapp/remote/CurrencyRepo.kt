@@ -3,7 +3,7 @@ package com.markaz.currencyapp.remote
 
 import com.markaz.currencyapp.base.network.RemoteDataSource
 import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
-import com.task.currencyapp.data.remote.baseclient.erros.ApiError
+import com.markaz.currencyapp.remote.erros.ApiError
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
@@ -13,9 +13,9 @@ interface CurrencyRepo {
 }
 
 @ActivityRetainedScoped
-class CurrencyRepoImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) : BaseRepository(),
+class CurrencyRepoImpl @Inject constructor(private val remoteDataSource: RemoteDataSource
+) : BaseRepository(),
     CurrencyRepo {
-
     override suspend fun getCurrencyResponse(url: String): ApiResponse<CurrencyResponse> {
         val response = executeSafelyRaw(call = {
             remoteDataSource.getAllCurrencies(url)

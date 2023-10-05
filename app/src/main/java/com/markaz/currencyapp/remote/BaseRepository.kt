@@ -2,7 +2,7 @@ package com.markaz.currencyapp.remote
 
 import com.markaz.currencyapp.dto.BaseApiResponse
 import com.markaz.currencyapp.remote.erros.NetworkErrors
-import com.task.currencyapp.data.remote.baseclient.erros.ApiError
+import com.markaz.currencyapp.remote.erros.ApiError
 import com.markaz.currencyapp.remote.erros.ServerError
 import com.markaz.currencyapp.remote.interfaces.IRepository
 import retrofit2.Response

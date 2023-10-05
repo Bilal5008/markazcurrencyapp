@@ -1,4 +1,4 @@
-package com.task.currencyapp.data.remote.baseclient.erros
+package com.markaz.currencyapp.remote.erros
 
 import com.google.gson.annotations.SerializedName
 

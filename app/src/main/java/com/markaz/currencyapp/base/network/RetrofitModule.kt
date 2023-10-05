@@ -3,7 +3,7 @@ package com.markaz.currencyapp.base.network
 
 import android.app.Application
 import android.content.Context
-import com.markaz.currencyapp.Config.getBaseURLForRetrofit
+import com.markaz.currencyapp.Config
 import com.markaz.currencyapp.base.application.MarkazCurrencyApplication
 import com.markaz.currencyapp.utils.Coroutines
 import com.markaz.currencyapp.utils.Utility.showToast
@@ -54,7 +54,6 @@ class RetrofitModule {
         if (true) {
             httpClient.addInterceptor(httpLoggingInterceptor)
         }
-        httpClient.addInterceptor(AuthenticatorInterceptor(application))
         httpClient.addInterceptor(object : ConnectivityInterceptor() {
             override fun onInternetUnavailable() {
                 Coroutines.main {
@@ -71,7 +70,7 @@ class RetrofitModule {
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://openexchangerates.org/")
+            .baseUrl(Config.BASE_URL)
             .client(okHttpClient)
             .build()
     }

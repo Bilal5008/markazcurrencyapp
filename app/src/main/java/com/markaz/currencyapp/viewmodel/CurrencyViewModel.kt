@@ -1,22 +1,32 @@
 package com.markaz.currencyapp.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.markaz.currencyapp.base.Resource
+import androidx.lifecycle.viewModelScope
 import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
+import com.markaz.currencyapp.remote.ApiResponse
 import com.markaz.currencyapp.remote.CurrencyRepoImpl
 import com.markaz.currencyapp.remote.CurrencyRepoImpl.Companion.URL_GET_CURRENCIES
-import com.markaz.currencyapp.utils.Coroutines
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CurrencyViewModel @Inject constructor(private val newProductPagesRepoImpl: CurrencyRepoImpl) : ViewModel() {
+class CurrencyViewModel @Inject constructor(private val currencyRepoImpl: CurrencyRepoImpl) :
+    ViewModel() {
 
-    val currencyLiveData = MutableLiveData<Resource<CurrencyResponse>>()
-    fun getCurrencyPageData() = Coroutines.default(this) {
-        currencyLiveData.postValue(Resource.Loading())
-        newProductPagesRepoImpl.getCurrencyResponse("https://openexchangerates.org/$URL_GET_CURRENCIES")
+    private val _responseStateFlow = MutableStateFlow<ApiResponse<CurrencyResponse>>(ApiResponse.Loading)
+
+    val responseStateFlow: StateFlow<ApiResponse<CurrencyResponse>>
+        get() = _responseStateFlow
+
+    fun getCurrencyPageData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response =
+                currencyRepoImpl.getCurrencyResponse(URL_GET_CURRENCIES)
+            _responseStateFlow.emit(response)
+        }
     }
-
 }
