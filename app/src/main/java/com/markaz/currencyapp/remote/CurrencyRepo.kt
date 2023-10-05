@@ -13,9 +13,6 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class CurrencyRepo @Inject constructor(private val remoteDataSource: CurrencyRetroApi) : BaseRepository(),
     CurrencyApi {
-
-
-
     override suspend fun getAllCurrencies(url: String): ApiResponse<CurrencyResponse> {
         val response = executeSafelyRaw(call = {
             remoteDataSource.getAllCurrencies(url)
@@ -30,7 +27,6 @@ class CurrencyRepo @Inject constructor(private val remoteDataSource: CurrencyRet
                 )
             )
         }
-
     }
 
     override suspend fun getLatestCurrencyRates(
@@ -45,18 +41,6 @@ class CurrencyRepo @Inject constructor(private val remoteDataSource: CurrencyRet
             )
         })
 
-
-
-//        return if (response?.isSuccessful == true) {
-//            ApiResponse.Success(response.code(), CurrencyRateResponse(base = "USD", rates = response.body()))
-//        } else {
-//            ApiResponse.Error(
-//                error = ApiError(
-//                    statusCode = response?.code() ?: -1,
-//                    message = response?.message() ?: ""
-//                )
-//            )
-//        }
     }
 
     companion object {

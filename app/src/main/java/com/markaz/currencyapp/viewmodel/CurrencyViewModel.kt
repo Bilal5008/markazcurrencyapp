@@ -1,6 +1,5 @@
 package com.markaz.currencyapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.markaz.currencyapp.dto.Currency
@@ -13,7 +12,6 @@ import com.markaz.currencyapp.remote.CurrencyRepo.Companion.ALL_CURRENCIES_ENDPO
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.local.entities.ExchangeRateEntity
 import com.markaz.currencyapp.remote.CurrencyRepo.Companion.LATEST_RATES_ENDPOINT
-import com.task.currencyapp.domain.datadtos.ExchangeRate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -56,7 +54,6 @@ class CurrencyViewModel @Inject constructor(
                             currencyName = entity.currencyName
                         )
                     }
-                    Log.d("", "Currency$currencyList")
                     _items.emit(currencies)
                 } else {
                     val response = currencyRepoImpl.getAllCurrencies(ALL_CURRENCIES_ENDPOINT)
@@ -79,7 +76,6 @@ class CurrencyViewModel @Inject constructor(
 
                         )
                     }
-                    Log.d("", "Currency$currencyList")
 
                 } else {
                     val response =

@@ -1,4 +1,4 @@
-package com.task.currencyapp.domain.datadtos
+package com.markaz.currencyapp.di.datadtos
 
 data class Currency(
     val currencyCode: String,

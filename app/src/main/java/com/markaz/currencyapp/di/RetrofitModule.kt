@@ -28,56 +28,5 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class RetrofitModule {
     @Provides
-    fun providesMainApplicationInstance(@ApplicationContext context: Context): MarkazCurrencyApplication {
-        return context as MarkazCurrencyApplication
-    }
-
-    @Singleton
-    @Provides
-    fun provideLogging(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    }
-
-    @Provides
-    @Singleton
-    internal fun provideOkHttpCache(application: Application): Cache {
-        val cacheSize = 10 * 1024 * 1024 // 10 MiB
-        return Cache(application.cacheDir, cacheSize.toLong())
-    }
-
-    @Singleton
-    @Provides
-    fun provideOKHTTPClient(application: MarkazCurrencyApplication, httpLoggingInterceptor: HttpLoggingInterceptor, cache: Cache): OkHttpClient {
-        val httpClient = OkHttpClient.Builder()
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .cache(cache)
-        if (true) {
-            httpClient.addInterceptor(httpLoggingInterceptor)
-        }
-        httpClient.addInterceptor(object : ConnectivityInterceptor() {
-            override fun onInternetUnavailable() {
-                Coroutines.main {
-                    showToast(application,"No Internet Available")
-                }
-            }
-
-        })
-        return httpClient.build()
-    }
-
-    @Singleton
-    @Provides
-    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Config.BASE_URL)
-            .client(okHttpClient)
-            .build()
-    }
-
-    @Provides
     fun providesGitRepoRetroService(): CurrencyRetroApi =  RetroNetwork().createService(CurrencyRetroApi::class.java)
-
 }

@@ -42,11 +42,8 @@ class  RetroNetwork @Inject constructor() {
     private val logger: HttpLoggingInterceptor
         get() {
             val loggingInterceptor = HttpLoggingInterceptor()
-            if (true) {
                 loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BODY }
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
+
             return loggingInterceptor
         }
 
