@@ -19,11 +19,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(viewModel.responseStateFlow) {
-                intent = Intent(this, CurrencyRatesActivity::class.java)
-                intent.putExtra("DefaultCurrency", it.currencyCode)
-                this.startActivity(intent)
-            }
+//            MainScreen(viewModel.currencyData) {
+//                intent = Intent(this, CurrencyRatesActivity::class.java)
+//                intent.putExtra("DefaultCurrency", it.currencyCode)
+//                this.startActivity(intent)
+//            }
 
         }
         viewModel.getCurrencyPageData()

@@ -97,7 +97,7 @@ fun LoadingScreen() {
     Row(
         modifier = Modifier
             .background(color = Color.White)
-            .fillMaxWidth()
+            .wrapContentSize()
             .padding(10.dp), horizontalArrangement = Arrangement.Center
     ) {
         CircularProgressIndicator(

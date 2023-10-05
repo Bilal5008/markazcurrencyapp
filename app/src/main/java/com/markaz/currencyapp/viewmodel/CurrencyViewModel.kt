@@ -10,6 +10,7 @@ import com.markaz.currencyapp.remote.ApiResponse
 import com.markaz.currencyapp.remote.CurrencyRepo
 import com.markaz.currencyapp.remote.CurrencyRepo.Companion.ALL_CURRENCIES_ENDPOINT
 import com.markaz.currencyapp.local.entities.CurrencyEntity
+import com.markaz.currencyapp.remote.CurrencyData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,14 +25,18 @@ class CurrencyViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _responseStateFlow =
-        MutableStateFlow<ApiResponse<CurrencyResponse>>(ApiResponse.Loading)
+//    private val _responseStateFlow =
+//        MutableStateFlow<ApiResponse<CurrencyResponse>>(ApiResponse.Loading)
+//
+//    val responseStateFlow: StateFlow<ApiResponse<CurrencyResponse>>
+//        get() = _responseStateFlow
+//
+//    private val _items = MutableStateFlow<List<CurrencyEntity>>(emptyList())
+//    val items: StateFlow<List<CurrencyEntity>> get() = _items
 
-    val responseStateFlow: StateFlow<ApiResponse<CurrencyResponse>>
-        get() = _responseStateFlow
+    private val _currencyData = MutableStateFlow<CurrencyData>(CurrencyData.Loading)
 
-    private val _items = MutableStateFlow<List<CurrencyEntity>>(emptyList())
-    val items: StateFlow<List<CurrencyEntity>> get() = _items
+    val currencyData: StateFlow<CurrencyData> get() = _currencyData
 
 
     fun getCurrencyPageData() {
@@ -45,13 +50,21 @@ class CurrencyViewModel @Inject constructor(
                         )
                     }
                     Log.d("", "Currency$currencyList")
-                    _items.emit(currencies)
+                    _currencyData.value = CurrencyData.LocalData(currencies)
+                    _currencyData.emit(_currencyData.value)
+
                 } else {
-                    val response = currencyRepoImpl.getAllCurrencies(ALL_CURRENCIES_ENDPOINT)
-                    if (response is ApiResponse.Success) {
-                        insertCurrencies(response.data.currencies)
+                    val apiResponse = currencyRepoImpl.getAllCurrencies(ALL_CURRENCIES_ENDPOINT)
+                    if (apiResponse is ApiResponse.Success) {
+                        _currencyData.value = CurrencyData.ApiSuccess(apiResponse)
+                        insertCurrencies(apiResponse.data.currencies)
+                    } else if (apiResponse is ApiResponse.Error) {
+                        _currencyData.value = CurrencyData.Error(apiResponse.error.message)
+                    } else {
+                        _currencyData.value = CurrencyData.Loading
                     }
-                    _responseStateFlow.emit(response)
+                    _currencyData.emit(_currencyData.value)
+
                 }
             }
         }
