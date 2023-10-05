@@ -1,7 +1,8 @@
 package com.markaz.currencyapp.local.localservice
 
-import com.markaz.currencyapp.dto.Currency
+import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
 import com.markaz.currencyapp.local.entities.CurrencyEntity
+import com.markaz.currencyapp.local.entities.ExchangeRateEntity
 import kotlinx.coroutines.flow.Flow
 
 
@@ -9,20 +10,18 @@ import javax.inject.Inject
 
 class ExchangeRepoLocal @Inject constructor(private val exchangeLocalDao: ExchangeLocalDao) : ExchangeRepoDbService {
 
+    override var getCurrencies: Flow<List<CurrencyEntity>>? = exchangeLocalDao.getAllCurrencies()!!
 
-   //    override suspend fun insertCurrencies(currencies: List<CurrencyEntity>) =
-//        exchangeLocalDao.insertAllCurrencies(currencies)
-//
-//    override suspend fun getExchangeRates(): List<ExchangeRateEntity>? =
-//        exchangeLocalDao.getAllRates()
-//
-//    override suspend fun insertExchangeRates(rates: List<ExchangeRateEntity>) =
-//        exchangeLocalDao.insertRates(rates)
-   override var getCurrencies: Flow<List<CurrencyEntity>>? = exchangeLocalDao.getAllCurrencies()!!
+    override fun insertCurrencies(currencyList: List<CurrencyEntity>) {
+        exchangeLocalDao.insertAllCurrencies(currencyList)
+    }
 
-   override fun insertCurrencies(currencyList: List<CurrencyEntity>) {
-      exchangeLocalDao.insertAllCurrencies(currencyList)
-   }
+    override var getCurrencyRates: Flow<List<ExchangeRateEntity>>? =
+        exchangeLocalDao.getAllCurrencyRates()!!
+
+    override fun insertCurrencyRates(rates: List<ExchangeRateEntity>) {
+        exchangeLocalDao.insertAllCurrencyRates(rates)
+    }
 
 
 }

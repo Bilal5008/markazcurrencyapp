@@ -3,12 +3,10 @@ package com.markaz.currencyapp.remote
 
 import com.markaz.currencyapp.di.network.CurrencyApi
 import com.markaz.currencyapp.di.network.CurrencyRetroApi
-import com.markaz.currencyapp.di.network.RemoteRepo
+import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
 import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
-import com.markaz.currencyapp.dto.responsedtos.RateResponse
 import com.markaz.currencyapp.remote.erros.ApiError
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import retrofit2.Response
 import javax.inject.Inject
 
 
@@ -38,8 +36,27 @@ class CurrencyRepo @Inject constructor(private val remoteDataSource: CurrencyRet
     override suspend fun getLatestCurrencyRates(
         url: String,
         appId: String
-    ): ApiResponse<CurrencyResponse> {
-        TODO("Not yet implemented")
+    ): ApiResponse<CurrencyRateResponse> {
+
+
+      return  executeSafely(call = {
+          remoteDataSource.getLatestCurrencyRates(
+               url =url, appId = appId
+            )
+        })
+
+
+
+//        return if (response?.isSuccessful == true) {
+//            ApiResponse.Success(response.code(), CurrencyRateResponse(base = "USD", rates = response.body()))
+//        } else {
+//            ApiResponse.Error(
+//                error = ApiError(
+//                    statusCode = response?.code() ?: -1,
+//                    message = response?.message() ?: ""
+//                )
+//            )
+//        }
     }
 
     companion object {

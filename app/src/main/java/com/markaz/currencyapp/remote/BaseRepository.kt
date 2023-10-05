@@ -26,7 +26,6 @@ abstract class BaseRepository : IRepository {
             if (response.isSuccessful) {
                 return ApiResponse.Success(response.code(), response.body()!!)
             }
-
             // Check if this is not a server side error (4** or 5**) then return error instead of success
             return ApiResponse.Error(detectError(response))
 

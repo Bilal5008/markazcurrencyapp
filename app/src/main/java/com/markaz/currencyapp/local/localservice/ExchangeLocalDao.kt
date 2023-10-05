@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.local.entities.ExchangeRateEntity
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +18,8 @@ interface ExchangeLocalDao {
      fun insertAllCurrencies(currencies: List<CurrencyEntity>)
 
     @Query("SELECT * FROM currency_rates")
-    suspend fun getAllRates(): List<ExchangeRateEntity>?
+     fun getAllCurrencyRates():  Flow<List<ExchangeRateEntity>>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRates(exchangeRates: List<ExchangeRateEntity>)
+     fun insertAllCurrencyRates(exchangeRates: List<ExchangeRateEntity>?)
 }

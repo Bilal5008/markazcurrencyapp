@@ -3,7 +3,7 @@ package com.markaz.currencyapp.dto.responsedtos
 import com.google.gson.annotations.SerializedName
 import com.markaz.currencyapp.dto.BaseApiResponse
 
-data class RateResponse(
+data class CurrencyRateResponse(
     @SerializedName("base")
     val base: String? = null,
     @SerializedName("rates")

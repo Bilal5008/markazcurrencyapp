@@ -80,10 +80,4 @@ class RetrofitModule {
     @Provides
     fun providesGitRepoRetroService(): CurrencyRetroApi =  RetroNetwork().createService(CurrencyRetroApi::class.java)
 
-
-//    @Singleton
-//    @Provides
-//    fun providesGitRepoRetroService(retrofit: Retrofit): CurrencyRetroApi {
-//        return retrofit.create(CurrencyRetroApi::class.java)
-//    }
 }

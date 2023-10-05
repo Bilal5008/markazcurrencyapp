@@ -21,26 +21,21 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.markaz.currencyapp.dto.Currency
-import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
 import com.markaz.currencyapp.remote.ApiResponse
-import kotlinx.coroutines.flow.StateFlow
+import com.markaz.currencyapp.viewmodel.CurrencyViewModel
 
 @Composable
 fun MainScreen(
-    responseLiveData: StateFlow<ApiResponse<CurrencyResponse>>,
+    responseLiveData: CurrencyViewModel,
     selectedItem: (index: Currency) -> Unit
 ) {
-    val state = responseLiveData.collectAsState()
+    val state = responseLiveData.responseCurrencyStateFlow.collectAsState()
     val value = state.value
 
     var currencyList: List<Currency>
@@ -65,6 +60,8 @@ fun MainScreen(
         }
 
     }
+    responseLiveData.responseCurrencyRatesStateFlow.collectAsState()
+
 
 
 }
