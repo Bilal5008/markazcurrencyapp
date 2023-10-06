@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.MaterialTheme
@@ -27,11 +25,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.markaz.currencyapp.dto.Currency
-import com.markaz.currencyapp.viewmodel.CurrencyViewModel
+import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
+import com.markaz.currencyapp.remote.ApiResponse
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun CurrencyRateScreen(viewModel: CurrencyViewModel) {
+fun CurrencyRateScreen(viewModel: StateFlow<ApiResponse<CurrencyRateResponse>>) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
