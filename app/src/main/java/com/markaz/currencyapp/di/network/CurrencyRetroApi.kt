@@ -1,6 +1,6 @@
 package com.markaz.currencyapp.di.network
 
-import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
+import com.markaz.currencyapp.dto.apidto.CurrencyRateResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

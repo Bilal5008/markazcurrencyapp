@@ -2,7 +2,7 @@ package com.markaz.currencyapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
+import com.markaz.currencyapp.dto.apidto.CurrencyRateResponse
 import com.markaz.currencyapp.local.localservice.ExchangeRepoLocal
 import com.markaz.currencyapp.remote.ApiResponse
 import com.markaz.currencyapp.remote.CurrencyRepo
@@ -10,7 +10,7 @@ import com.markaz.currencyapp.remote.CurrencyRepo.Companion.ALL_CURRENCIES_ENDPO
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.local.entities.ExchangeRateEntity
 import com.markaz.currencyapp.remote.CurrencyRepo.Companion.LATEST_RATES_ENDPOINT
-import com.markaz.currencyapp.ui.uilayer.CurrencyResult
+import com.markaz.currencyapp.dto.apidto.CurrencyResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,6 +2,9 @@ package com.markaz.currencyapp.di.network
 
 import android.os.Environment
 import com.markaz.currencyapp.Config
+import com.markaz.currencyapp.di.interceptor.ConnectivityInterceptor
+import com.markaz.currencyapp.utils.Coroutines
+import com.markaz.currencyapp.utils.Utility.showToast
 import okhttp3.Cache
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

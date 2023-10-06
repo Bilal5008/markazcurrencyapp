@@ -1,4 +1,4 @@
-package com.markaz.currencyapp.di.application
+package com.markaz.currencyapp.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

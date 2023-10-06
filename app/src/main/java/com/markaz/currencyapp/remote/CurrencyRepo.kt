@@ -3,11 +3,10 @@ package com.markaz.currencyapp.remote
 
 import com.markaz.currencyapp.di.network.CurrencyApi
 import com.markaz.currencyapp.di.network.CurrencyRetroApi
-import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
-import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
+import com.markaz.currencyapp.dto.apidto.CurrencyRateResponse
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.remote.erros.ApiError
-import com.markaz.currencyapp.ui.uilayer.CurrencyResult
+import com.markaz.currencyapp.dto.apidto.CurrencyResult
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
@@ -36,7 +35,7 @@ class CurrencyRepo @Inject constructor(private val remoteDataSource: CurrencyRet
         appId: String
     ): ApiResponse<CurrencyRateResponse> {
 
-      return  executeSafely(call = {
+      return executeSafely(call = {
           remoteDataSource.getLatestCurrencyRates(
                url =url, appId = appId
             )

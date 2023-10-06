@@ -1,9 +1,8 @@
 package com.markaz.currencyapp.di.network
 
-import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
-import com.markaz.currencyapp.dto.responsedtos.CurrencyResponse
+import com.markaz.currencyapp.dto.apidto.CurrencyRateResponse
 import com.markaz.currencyapp.remote.ApiResponse
-import com.markaz.currencyapp.ui.uilayer.CurrencyResult
+import com.markaz.currencyapp.dto.apidto.CurrencyResult
 
 
 interface CurrencyApi {

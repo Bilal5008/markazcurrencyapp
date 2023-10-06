@@ -15,7 +15,6 @@ enum class Screen {
     Screen1,
     Screen2
 }
-
 @Composable
 fun AppContainer(viewModel: CurrencyViewModel) {
     var currentScreen by remember { mutableStateOf(Screen.Screen1) }

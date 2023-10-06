@@ -25,7 +25,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
+import com.markaz.currencyapp.dto.apidto.CurrencyRateResponse
 import com.markaz.currencyapp.remote.ApiResponse
 import kotlinx.coroutines.flow.StateFlow
 
@@ -34,6 +34,7 @@ fun CurrencyRateScreen(viewModel: StateFlow<ApiResponse<CurrencyRateResponse>>) 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        SimpleToolbar("Currency Conversion")
         CurrencyInputEditText()
     }
 

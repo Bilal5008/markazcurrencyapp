@@ -19,8 +19,6 @@ class MainActivity : ComponentActivity() {
             AppContainer(viewModel)
         }
         viewModel.getCurrencyPageData()
-
-
     }
 
 }

@@ -1,4 +1,4 @@
-package com.markaz.currencyapp.ui.uilayer
+package com.markaz.currencyapp.dto.apidto
 
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.remote.erros.ApiError

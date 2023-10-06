@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.markaz.currencyapp.dto.responsedtos.CurrencyRateResponse
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.local.entities.ExchangeRateEntity
 import kotlinx.coroutines.flow.Flow
