@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.markaz.currencyapp.dto.apidto.CurrencyRateResponse
-import com.markaz.currencyapp.remote.ApiResponse
+import com.markaz.currencyapp.network.base.ApiResponse
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable

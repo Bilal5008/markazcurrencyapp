@@ -3,7 +3,7 @@ package com.markaz.currencyapp.di
 import android.content.Context
 import androidx.room.Room
 import com.markaz.currencyapp.local.db.ExchangeAppDB
-import com.markaz.currencyapp.local.localservice.ExchangeLocalDao
+import com.markaz.currencyapp.local.localservice.CurrencyLocalDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class LocalDbModule {
     @Provides
-    fun provideExchangeDao(appDatabase: ExchangeAppDB): ExchangeLocalDao {
+    fun provideExchangeDao(appDatabase: ExchangeAppDB): CurrencyLocalDao {
         return appDatabase.exchangeLocalDao()
     }
 

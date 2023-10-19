@@ -1,7 +1,7 @@
 package com.markaz.currencyapp.dto.apidto
 
 import com.markaz.currencyapp.local.entities.CurrencyEntity
-import com.markaz.currencyapp.remote.erros.ApiError
+import com.markaz.currencyapp.network.erros.ApiError
 
 
 sealed class CurrencyResult {

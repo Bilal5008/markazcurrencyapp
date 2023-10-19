@@ -9,8 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.markaz.currencyapp.local.entities.CurrencyEntity
-import com.markaz.currencyapp.remote.erros.ApiError
+import com.markaz.currencyapp.network.erros.ApiError
 
 
 @Composable

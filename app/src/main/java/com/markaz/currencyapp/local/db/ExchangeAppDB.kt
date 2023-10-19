@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.markaz.currencyapp.local.converter.DataConverter
 import com.markaz.currencyapp.local.entities.CurrencyEntity
 import com.markaz.currencyapp.local.entities.ExchangeRateEntity
-import com.markaz.currencyapp.local.localservice.ExchangeLocalDao
+import com.markaz.currencyapp.local.localservice.CurrencyLocalDao
 
 @Database(
     entities = [CurrencyEntity::class, ExchangeRateEntity::class],
@@ -15,5 +15,5 @@ import com.markaz.currencyapp.local.localservice.ExchangeLocalDao
 )
 @TypeConverters(DataConverter::class)
 abstract class ExchangeAppDB : RoomDatabase() {
-    abstract fun exchangeLocalDao(): ExchangeLocalDao
+    abstract fun exchangeLocalDao(): CurrencyLocalDao
 }

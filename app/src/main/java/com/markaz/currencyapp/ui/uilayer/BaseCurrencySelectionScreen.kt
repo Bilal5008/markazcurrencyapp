@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.markaz.currencyapp.dto.apidto.CurrencyResult
 import com.markaz.currencyapp.local.entities.CurrencyEntity
-import com.markaz.currencyapp.remote.erros.ApiError
+import com.markaz.currencyapp.network.erros.ApiError
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
